@@ -21,6 +21,7 @@ function getFormattedDate(date) {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
+    timeZone: "America/New_York"
   });
 }
 
