@@ -1,0 +1,76 @@
+.table {
+  max-width: 600px;
+  margin: auto;
+}
+
+.chart {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 0;
+}
+
+.miscStats {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 0;
+}
+
+.lineups {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 0;
+}
+
+@media only screen and (min-width: 992px) {
+  .table {
+    max-width: 450px;
+  }
+
+  .chart {
+    max-width: 450px;
+  }
+
+  .miscStats {
+    max-width: 450px;
+  }
+
+  .lineups {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .table {
+    max-width: 550px;
+  }
+
+  .chart {
+    max-width: 550px;
+  }
+
+  .miscStats {
+    max-width: 550px;
+  }
+
+  .lineups {
+    max-width: 550px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .table {
+    max-width: 600px;
+  }
+
+  .chart {
+    max-width: 600px;
+  }
+
+  .miscStats {
+    max-width: 600px;
+  }
+
+  .lineups {
+    max-width: 600px;
+  }
+}

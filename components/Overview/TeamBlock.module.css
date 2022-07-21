@@ -1,0 +1,19 @@
+.card {
+  text-align: center;
+  margin: 1rem;
+  background-color: white;
+}
+
+.btn {
+  width: 6rem;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+
+.teamName {
+  font-weight: bold;
+}
+
+.yearFounded {
+  font-style: italic;
+}

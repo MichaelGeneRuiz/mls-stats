@@ -1,0 +1,29 @@
+.letter {
+  min-width: 20px;
+  max-width: 20px;
+  flex: 1;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  font-size: small;
+}
+
+.green {
+  background-color:chartreuse;
+}
+
+.red {
+  background-color: red;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+@media only screen and (min-width: 576px) {
+  .letter {
+    min-width: 25px;
+    max-width: 25px;
+    font-size:medium
+  }
+}
