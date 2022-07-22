@@ -94,7 +94,7 @@ export async function getStaticProps(context) {
       teamDetails: JSON.stringify(teamDetails),
       venueDetails: JSON.stringify(venueDetails),
     },
-    revalidate: 3600,
+    revalidate: 300,
   };
 }
 
