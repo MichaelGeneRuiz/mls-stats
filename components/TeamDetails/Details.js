@@ -4,8 +4,6 @@ import Header from "./Header/Header";
 import Stats from "./Stats/Stats";
 import Venue from "./Venue/Venue";
 
-import classes from "./Details.module.css";
-
 function Details(props) {
   const { teamDetails, venueDetails, storedDate } = props;
 
@@ -26,11 +24,14 @@ function Details(props) {
         penalty={teamDetails.penalty}
         lineups={teamDetails.lineups}
       />
-      {/* INCLUDE VENUE INFO HERE */}
       <hr />
       <Venue venueDetails={venueDetails} />
       <hr />
-      <p className={classes.footer}>Last Updated: {storedDate}</p>
+      <p className="center">
+        If the page was last updated more than a day ago, refresh the page to
+        see a more recent version.
+      </p>
+      <p className="center">Last Updated: {storedDate}</p>
     </Container>
   );
 }
