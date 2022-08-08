@@ -28,8 +28,8 @@ function Details(props) {
       <Venue venueDetails={venueDetails} />
       <hr />
       <p className="center">
-        If the page was last updated more than a day ago, refresh the page to
-        see a more recent version.
+        If the data presented is not accurate, please allow the page 24 hours to
+        fetch the most recent data from the API.
       </p>
       <p className="center">Last Updated: {storedDate}</p>
     </Container>

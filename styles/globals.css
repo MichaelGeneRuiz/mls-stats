@@ -13,6 +13,12 @@ body {
   text-align: center;
 }
 
+.centerSpinner {
+  margin: auto;
+  text-align: center;
+  margin-top: 40vh;
+}
+
 ul {
   list-style: none;
 }

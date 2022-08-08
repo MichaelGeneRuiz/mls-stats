@@ -3,12 +3,12 @@ import { Fragment } from "react";
 
 import { getTeamStatsAPI } from "../../helpers/api-util";
 import {
-  getAllTeamsDB,
   getStoredDate,
   getTeamDetailsDB,
   getVenueDB,
   postDate,
   postTeamDetails,
+  getAllTeamsDB,
 } from "../../helpers/db-util";
 
 import Details from "../../components/TeamDetails/Details";
@@ -21,7 +21,7 @@ function getFormattedDate(date) {
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
-    timeZone: "America/New_York"
+    timeZone: "America/New_York",
   });
 }
 
@@ -47,8 +47,18 @@ function TeamDetailPage(props) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const teamId = context.params.teamId;
+
+  const teams = await getAllTeamsDB();
+
+  const exists = teams.some((team) => team.id === +teamId);
+
+  if (!exists) {
+    return {
+      notFound: true,
+    };
+  }
 
   const nowDate = new Date();
   const storedDateObj = await getStoredDate(teamId);
@@ -94,17 +104,6 @@ export async function getStaticProps(context) {
       teamDetails: JSON.stringify(teamDetails),
       venueDetails: JSON.stringify(venueDetails),
     },
-    revalidate: 300,
-  };
-}
-
-export async function getStaticPaths() {
-  const teams = await getAllTeamsDB();
-  const ids = teams.map((team) => `${team.id}`);
-
-  return {
-    paths: ids.map((id) => ({ params: { teamId: id } })),
-    fallback: false,
   };
 }
 
