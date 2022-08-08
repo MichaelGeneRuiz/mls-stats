@@ -1,0 +1,47 @@
+.header {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.table {
+  margin-top: 0.5rem;
+  text-align: center;
+  background-color: whitesmoke;
+  font-size: 0.66rem;
+}
+
+.table th:nth-child(3) {
+  display: none;
+}
+
+.table td:nth-child(3) {
+  display: none;
+}
+
+.table thead {
+  text-align: center;
+}
+
+.tableHeader {
+  background-color: lightcoral;
+}
+
+@media only screen and (min-width: 360px) {
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table th:nth-child(3) {
+    display: table-cell;
+  }
+
+  .table td:nth-child(3) {
+    display: table-cell;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .table {
+    font-size: 1rem;
+  }
+}

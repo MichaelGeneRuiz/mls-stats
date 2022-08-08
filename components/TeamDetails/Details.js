@@ -28,8 +28,8 @@ function Details(props) {
       <Venue venueDetails={venueDetails} />
       <hr />
       <p className="center">
-        If the data presented is not accurate, please allow the page 24 hours to
-        fetch the most recent data from the API.
+        This page will fetch the most recent data from the API at most once
+        every 24 hours.
       </p>
       <p className="center">Last Updated: {storedDate}</p>
     </Container>

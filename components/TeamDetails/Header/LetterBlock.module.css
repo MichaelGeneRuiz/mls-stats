@@ -9,7 +9,7 @@
 }
 
 .green {
-  background-color:chartreuse;
+  background-color: chartreuse;
 }
 
 .red {
@@ -24,6 +24,6 @@
   .letter {
     min-width: 25px;
     max-width: 25px;
-    font-size:medium
+    font-size: medium;
   }
 }

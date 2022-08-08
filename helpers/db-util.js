@@ -52,6 +52,29 @@ export async function getStoredDate(teamId) {
   return date[0];
 }
 
+export async function getStandingDate() {
+  let client;
+
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+
+  let date;
+
+  try {
+    date = await getAllDocuments(client, "standings", {}, { isDate: true });
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  client.close();
+
+  return date[0];
+}
+
 export async function postDate(currDate, teamId) {
   let client;
 
@@ -70,6 +93,35 @@ export async function postDate(currDate, teamId) {
       "date",
       { id: teamId },
       { $set: { date: currDate, id: teamId } },
+      { upsert: true }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  client.close();
+
+  return result;
+}
+
+export async function postStandingDate(currDate) {
+  let client;
+
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+
+  let result;
+
+  try {
+    result = await updateDocument(
+      client,
+      "standings",
+      { isDate: true },
+      { $set: { date: currDate, isDate: true } },
       { upsert: true }
     );
   } catch (error) {
@@ -180,6 +232,41 @@ export async function postTeamDetails(currDetails, teamId) {
   return result;
 }
 
+export async function postStandings(standingData, isEastern) {
+  let client;
+
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+
+  let result;
+
+  try {
+    result = await updateDocument(
+      client,
+      "standings",
+      { isEastern: isEastern },
+      {
+        $set: {
+          isEastern: isEastern,
+          isDate: false,
+          ...standingData,
+        },
+      },
+      { upsert: true }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  client.close();
+
+  return result;
+}
+
 export async function getAllTeamsDB() {
   let client;
 
@@ -257,4 +344,32 @@ export async function getTeamDetailsDB(teamId) {
   client.close();
 
   return documents[0];
+}
+
+export async function getStandings() {
+  let client;
+
+  try {
+    client = await connectDatabase();
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+
+  let documents;
+
+  try {
+    documents = await getAllDocuments(
+      client,
+      "standings",
+      {},
+      { isDate: false }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  client.close();
+
+  return documents;
 }

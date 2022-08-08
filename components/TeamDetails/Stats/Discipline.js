@@ -22,7 +22,7 @@ function DisciplineGraph(props) {
     BarElement,
     Title,
     Tooltip,
-    Legend,
+    Legend
   );
 
   const labels = Object.keys(cards.yellow);

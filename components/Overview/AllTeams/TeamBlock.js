@@ -22,13 +22,7 @@ function TeamBlock(props) {
         <Card.Text className={classes.yearFounded}>
           Founded in {team.founded ? team.founded : 2015}
         </Card.Text>
-        <Image
-          className={classes.cardImage}
-          src={team.logo}
-          alt={team.name}
-          width={150}
-          height={150}
-        />
+        <Image src={team.logo} alt={team.name} width={150} height={150} />
       </Card.Body>
       <Button className={classes.btn} onClick={detailHandler}>
         Details

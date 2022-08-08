@@ -1,0 +1,22 @@
+.table {
+  max-width: 600px;
+  margin: auto;
+}
+
+@media only screen and (min-width: 992px) {
+  .table {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .table {
+    max-width: 550px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .table {
+    max-width: 600px;
+  }
+}

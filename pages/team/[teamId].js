@@ -10,20 +10,9 @@ import {
   postTeamDetails,
   getAllTeamsDB,
 } from "../../helpers/db-util";
+import { getFormattedDate } from "../../helpers/util";
 
 import Details from "../../components/TeamDetails/Details";
-
-function getFormattedDate(date) {
-  return new Date(date).toLocaleString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZone: "America/New_York",
-  });
-}
 
 function TeamDetailPage(props) {
   const parsedTeamDetails = JSON.parse(props.teamDetails);

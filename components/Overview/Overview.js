@@ -1,20 +1,20 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import AllTeams from "./AllTeams/AllTeams";
 
-import TeamBlock from "./TeamBlock";
+import Standings from "./Standings/Standings";
 
 function Overview(props) {
+  const { easternData, westernData, storedDate, teams } = props;
+
   return (
     <Container>
-      <h1 className="center">All MLS Teams</h1>
-      <Row xs={1} md={2} xl={4}>
-        {props.teams.map((team) => (
-          <Col key={team.id}>
-            <TeamBlock team={team} />
-          </Col>
-        ))}
-      </Row>
+      <Standings
+        easternData={easternData}
+        westernData={westernData}
+        storedDate={storedDate}
+      />
+      <hr />
+      <AllTeams teams={teams} />
     </Container>
   );
 }
