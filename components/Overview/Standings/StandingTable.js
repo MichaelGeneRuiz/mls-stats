@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 
@@ -31,7 +33,17 @@ function StandingTable(props) {
           {arrData.map((team) => (
             <tr key={team.rank}>
               <td>{team.rank}</td>
-              <td>{team.team.name}</td>
+              <td className={classes.name}>
+                <div className={classes.logo}>
+                  <Image
+                    src={team.team.logo}
+                    alt={team.team.name}
+                    width={20}
+                    height={20}
+                  />
+                </div>
+                {team.team.name}
+              </td>
               <td>{team.all.played}</td>
               <td>{team.all.win}</td>
               <td>{team.all.draw}</td>

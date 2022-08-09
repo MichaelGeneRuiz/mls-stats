@@ -18,17 +18,22 @@
   display: none;
 }
 
-.table thead {
-  text-align: center;
-}
-
 .tableHeader {
   background-color: lightcoral;
 }
 
+.name {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  display: none;
+}
+
 @media only screen and (min-width: 360px) {
   .table {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .table th:nth-child(3) {
@@ -42,6 +47,16 @@
 
 @media only screen and (min-width: 576px) {
   .table {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .name {
+    justify-content: left;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 0.25rem;
   }
 }
