@@ -13,6 +13,8 @@ import { getStandingsAPI } from "../helpers/api-util";
 
 import Overview from "../components/Overview/Overview";
 
+export const SEASON = 2023;
+
 function HomePage(props) {
   const parsedTeams = JSON.parse(props.teams);
   const parsedEasternData = JSON.parse(props.easternData);
@@ -40,7 +42,7 @@ function HomePage(props) {
 export async function getServerSideProps() {
   /* Team overview data does not change very often, so it is commented out.*/
 
-  // const teams = await getTeamDataAPI(253, 2022);
+  // const teams = await getTeamDataAPI(253, SEASON);
 
   // for (const set in teams) {
   //   const teamName = teams[set]["team"].name;
@@ -75,7 +77,7 @@ export async function getServerSideProps() {
 
     // 3600000ms = 1 hour
     if (nowDate - storedDate > 3600000) {
-      const standingData = await getStandingsAPI(253, 2022);
+      const standingData = await getStandingsAPI(253, SEASON);
 
       const easternPostData = standingData[0].league.standings[0];
       const westernPostData = standingData[0].league.standings[1];
@@ -93,7 +95,7 @@ export async function getServerSideProps() {
   let [easternData, westernData] = await getStandings();
 
   if (!easternData || !westernData) {
-    const standingData = await getStandingsAPI(253, 2022);
+    const standingData = await getStandingsAPI(253, SEASON);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];

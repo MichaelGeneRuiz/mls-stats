@@ -9,7 +9,12 @@ import classes from "./Header.module.css";
 function Header(props) {
   const { teamName, logo, form } = props;
 
-  const lastFiveGames = form.slice(-5);
+  let lastFiveGames;
+
+  if(!form)
+    lastFiveGames = "";
+  else 
+    lastFiveGames = form.slice(-5);
 
   return (
     <Container>
