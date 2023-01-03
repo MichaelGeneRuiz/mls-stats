@@ -66,30 +66,33 @@ export async function getServerSideProps() {
   /* ------------------------------------------------------------------------ */
 
   const nowDate = new Date();
-  const storedDateObj = await getStandingDate();
+  let storedDateObj = await getStandingDate();
   let storedDate;
+  let noDate = false;
 
   if (!storedDateObj) {
     await postStandingDate(nowDate);
+    storedDateObj = await getStandingDate();
+    noDate = true;
+  }
+
+  storedDate = storedDateObj.date;
+
+  // 3600000ms = 1 hour
+  if (nowDate - storedDate > 3600000 || noDate) {
+    noDate = false;
+    const standingData = await getStandingsAPI(253, SEASON);
+
+    const easternPostData = standingData[0].league.standings[0];
+    const westernPostData = standingData[0].league.standings[1];
+
+    await postStandings(easternPostData, true);
+    await postStandings(westernPostData, false);
+
+    await postStandingDate(nowDate);
     storedDate = getFormattedDate(nowDate);
   } else {
-    storedDate = storedDateObj.date;
-
-    // 3600000ms = 1 hour
-    if (nowDate - storedDate > 3600000) {
-      const standingData = await getStandingsAPI(253, SEASON);
-
-      const easternPostData = standingData[0].league.standings[0];
-      const westernPostData = standingData[0].league.standings[1];
-
-      await postStandings(easternPostData, true);
-      await postStandings(westernPostData, false);
-
-      await postStandingDate(nowDate);
-      storedDate = getFormattedDate(nowDate);
-    } else {
-      storedDate = getFormattedDate(storedDateObj.date);
-    }
+    storedDate = getFormattedDate(storedDateObj.date);
   }
 
   let [easternData, westernData] = await getStandings();

@@ -52,26 +52,29 @@ export async function getServerSideProps(context) {
   }
 
   const nowDate = new Date();
-  const storedDateObj = await getStoredDate(teamId);
+  let storedDateObj = await getStoredDate(teamId);
   let storedDate;
+  let noDate = false;
 
   if (!storedDateObj) {
     await postDate(nowDate, teamId);
+    storedDateObj = await getStoredDate(teamId);
+    noDate = true;
+  }
+
+  // 1 day = 86400000
+  storedDate = storedDateObj.date;
+
+  if (nowDate - storedDate > 86400000 || noDate) {
+    noDate = false;
+    const teamDetailData = await getTeamStatsAPI(253, SEASON, teamId);
+
+    await postTeamDetails(teamDetailData, +teamId);
+
+    await postDate(nowDate, teamId);
     storedDate = getFormattedDate(nowDate);
   } else {
-    // 1 day = 86400000
-    storedDate = storedDateObj.date;
-
-    if (nowDate - storedDate > 86400000) {
-      const teamDetailData = await getTeamStatsAPI(253, SEASON, teamId);
-
-      await postTeamDetails(teamDetailData, +teamId);
-
-      await postDate(nowDate, teamId);
-      storedDate = getFormattedDate(nowDate);
-    } else {
-      storedDate = getFormattedDate(storedDateObj.date);
-    }
+    storedDate = getFormattedDate(storedDateObj.date);
   }
 
   let teamDetails = await getTeamDetailsDB(+teamId);
