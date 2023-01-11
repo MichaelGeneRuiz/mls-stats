@@ -13,7 +13,7 @@ import { getStandingsAPI } from "../helpers/api-util";
 
 import Overview from "../components/Overview/Overview";
 
-export const SEASON = 2023;
+export const SEASON = 2022;
 
 function HomePage(props) {
   const parsedTeams = JSON.parse(props.teams);
