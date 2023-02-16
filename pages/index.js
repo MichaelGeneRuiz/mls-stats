@@ -13,8 +13,6 @@ import { getStandingsAPI } from "../helpers/api-util";
 
 import Overview from "../components/Overview/Overview";
 
-export const SEASON = 2022;
-
 function HomePage(props) {
   const parsedTeams = JSON.parse(props.teams);
   const parsedEasternData = JSON.parse(props.easternData);
@@ -39,10 +37,17 @@ function HomePage(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({req, res}) {
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=300'
+  )
+
+  const YEAR = parseInt(process.env.YEAR);
   /* Team overview data does not change very often, so it is commented out.*/
 
-  // const teams = await getTeamDataAPI(253, SEASON);
+  // const teams = await getTeamDataAPI(253, YEAR);
 
   // for (const set in teams) {
   //   const teamName = teams[set]["team"].name;
@@ -81,7 +86,7 @@ export async function getServerSideProps() {
   // 3600000ms = 1 hour
   if (nowDate - storedDate > 3600000 || noDate) {
     noDate = false;
-    const standingData = await getStandingsAPI(253, SEASON);
+    const standingData = await getStandingsAPI(253, YEAR);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];
@@ -98,7 +103,7 @@ export async function getServerSideProps() {
   let [easternData, westernData] = await getStandings();
 
   if (!easternData || !westernData) {
-    const standingData = await getStandingsAPI(253, SEASON);
+    const standingData = await getStandingsAPI(253, YEAR);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];

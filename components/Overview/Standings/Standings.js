@@ -3,8 +3,6 @@ import Row from "react-bootstrap/Row";
 
 import StandingTable from "./StandingTable";
 
-import { SEASON } from "../../../pages/index";
-
 import classes from "./Standings.module.css";
 
 function Standings(props) {
@@ -12,7 +10,7 @@ function Standings(props) {
 
   return (
     <Container>
-      <h1 className="center">{SEASON} Regular Season Standings</h1>
+      <h1 className="center">{process.env.YEAR} Regular Season Standings</h1>
       <Row>
         <div className={classes.table}>
           <StandingTable data={easternData} />

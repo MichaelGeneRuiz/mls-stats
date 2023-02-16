@@ -12,8 +12,6 @@ import {
 } from "../../helpers/db-util";
 import { getFormattedDate } from "../../helpers/util";
 
-import { SEASON } from "../index";
-
 import Details from "../../components/TeamDetails/Details";
 
 function TeamDetailPage(props) {
@@ -38,7 +36,15 @@ function TeamDetailPage(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context, {req, res}) {
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=300'
+  )
+
+  const YEAR = parseInt(process.env.YEAR);
+
   const teamId = context.params.teamId;
 
   const teams = await getAllTeamsDB();
@@ -67,7 +73,7 @@ export async function getServerSideProps(context) {
 
   if (nowDate - storedDate > 86400000 || noDate) {
     noDate = false;
-    const teamDetailData = await getTeamStatsAPI(253, SEASON, teamId);
+    const teamDetailData = await getTeamStatsAPI(253, YEAR, teamId);
 
     await postTeamDetails(teamDetailData, +teamId);
 
@@ -80,7 +86,7 @@ export async function getServerSideProps(context) {
   let teamDetails = await getTeamDetailsDB(+teamId);
 
   if (!teamDetails) {
-    const teamDetailData = await getTeamStatsAPI(253, SEASON, teamId);
+    const teamDetailData = await getTeamStatsAPI(253, YEAR, teamId);
 
     await postTeamDetails(teamDetailData, +teamId);
 
