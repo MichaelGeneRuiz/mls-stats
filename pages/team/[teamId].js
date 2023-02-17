@@ -36,14 +36,14 @@ function TeamDetailPage(props) {
   );
 }
 
-export async function getServerSideProps(context, {req, res}) {
+export async function getServerSideProps(context) {
 
-  res.setHeader(
+  context.res.setHeader(
     'Cache-Control',
     'public, s-maxage=300'
   )
 
-  const YEAR = parseInt(process.env.YEAR);
+  const year = parseInt(process.env.YEAR);
 
   const teamId = context.params.teamId;
 
@@ -73,7 +73,7 @@ export async function getServerSideProps(context, {req, res}) {
 
   if (nowDate - storedDate > 86400000 || noDate) {
     noDate = false;
-    const teamDetailData = await getTeamStatsAPI(253, YEAR, teamId);
+    const teamDetailData = await getTeamStatsAPI(253, year, teamId);
 
     await postTeamDetails(teamDetailData, +teamId);
 
@@ -86,7 +86,7 @@ export async function getServerSideProps(context, {req, res}) {
   let teamDetails = await getTeamDetailsDB(+teamId);
 
   if (!teamDetails) {
-    const teamDetailData = await getTeamStatsAPI(253, YEAR, teamId);
+    const teamDetailData = await getTeamStatsAPI(253, year, teamId);
 
     await postTeamDetails(teamDetailData, +teamId);
 

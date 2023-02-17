@@ -32,22 +32,24 @@ function HomePage(props) {
         easternData={parsedEasternData}
         westernData={parsedWesternData}
         storedDate={props.storedDate}
+        year={props.year}
       />
     </Fragment>
   );
 }
 
-export async function getServerSideProps({req, res}) {
+export async function getServerSideProps(context) {
 
-  res.setHeader(
+  context.res.setHeader(
     'Cache-Control',
     'public, s-maxage=300'
   )
 
-  const YEAR = parseInt(process.env.YEAR);
+  const year = parseInt(process.env.YEAR);
+
   /* Team overview data does not change very often, so it is commented out.*/
 
-  // const teams = await getTeamDataAPI(253, YEAR);
+  // const teams = await getTeamDataAPI(253, year);
 
   // for (const set in teams) {
   //   const teamName = teams[set]["team"].name;
@@ -86,7 +88,7 @@ export async function getServerSideProps({req, res}) {
   // 3600000ms = 1 hour
   if (nowDate - storedDate > 3600000 || noDate) {
     noDate = false;
-    const standingData = await getStandingsAPI(253, YEAR);
+    const standingData = await getStandingsAPI(253, year);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];
@@ -103,7 +105,7 @@ export async function getServerSideProps({req, res}) {
   let [easternData, westernData] = await getStandings();
 
   if (!easternData || !westernData) {
-    const standingData = await getStandingsAPI(253, YEAR);
+    const standingData = await getStandingsAPI(253, year);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];
@@ -123,6 +125,7 @@ export async function getServerSideProps({req, res}) {
       easternData: JSON.stringify(easternData),
       westernData: JSON.stringify(westernData),
       storedDate,
+      year,
     },
   };
 }

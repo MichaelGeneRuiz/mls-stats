@@ -6,11 +6,11 @@ import StandingTable from "./StandingTable";
 import classes from "./Standings.module.css";
 
 function Standings(props) {
-  const { easternData, westernData, storedDate } = props;
-
+  const { easternData, westernData, storedDate, year } = props;
+  
   return (
     <Container>
-      <h1 className="center">{process.env.YEAR} Regular Season Standings</h1>
+      <h1 className="center">{year} Regular Season Standings</h1>
       <Row>
         <div className={classes.table}>
           <StandingTable data={easternData} />

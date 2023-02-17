@@ -4,7 +4,7 @@ import AllTeams from "./AllTeams/AllTeams";
 import Standings from "./Standings/Standings";
 
 function Overview(props) {
-  const { easternData, westernData, storedDate, teams } = props;
+  const { easternData, westernData, storedDate, teams, year } = props;
 
   return (
     <Container>
@@ -12,6 +12,7 @@ function Overview(props) {
         easternData={easternData}
         westernData={westernData}
         storedDate={storedDate}
+        year={year}
       />
       <hr />
       <AllTeams teams={teams} />
