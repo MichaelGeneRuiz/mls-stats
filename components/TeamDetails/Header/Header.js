@@ -12,7 +12,7 @@ function Header(props) {
   let lastFiveGames;
 
   if(!form)
-    lastFiveGames = "";
+    lastFiveGames = "N/A";
   else 
     lastFiveGames = form.slice(-5);
 

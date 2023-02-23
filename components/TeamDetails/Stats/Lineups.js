@@ -17,12 +17,16 @@ function Lineups(props) {
           </tr>
         </thead>
         <tbody>
-          {lineups.map((lineup) => (
+          {lineups.length !== 0 && lineups.map((lineup) => (
             <tr key={lineup.formation}>
               <td>{lineup.formation}</td>
               <td>{lineup.played}</td>
             </tr>
           ))}
+          {lineups.length === 0 && <tr>
+              <td>N/A</td>
+              <td>0</td>
+            </tr>}
         </tbody>
       </Table>
     </Container>

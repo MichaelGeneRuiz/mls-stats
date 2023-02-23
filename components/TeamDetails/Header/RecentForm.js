@@ -11,9 +11,10 @@ function RecentForm(props) {
     <div className={classes.container}>
       <h4 className="center">Last 5 Games</h4>
       <div className={classes.games}>
-        {arrayForm.map((letter, index) => (
+        {form !== "N/A" && arrayForm.map((letter, index) => (
           <LetterBlock key={index} letter={letter} />
         ))}
+        {form === "N/A" && "N/A"}
       </div>
     </div>
   );

@@ -13,6 +13,8 @@ import { getStandingsAPI } from "../helpers/api-util";
 
 import Overview from "../components/Overview/Overview";
 
+export const YEAR = 2023;
+
 function HomePage(props) {
   const parsedTeams = JSON.parse(props.teams);
   const parsedEasternData = JSON.parse(props.easternData);
@@ -32,7 +34,7 @@ function HomePage(props) {
         easternData={parsedEasternData}
         westernData={parsedWesternData}
         storedDate={props.storedDate}
-        year={props.year}
+        year={YEAR}
       />
     </Fragment>
   );
@@ -44,8 +46,6 @@ export async function getServerSideProps(context) {
     'Cache-Control',
     'public, s-maxage=300'
   )
-
-  const year = parseInt(process.env.YEAR);
 
   /* Team overview data does not change very often, so it is commented out.*/
 
@@ -88,7 +88,7 @@ export async function getServerSideProps(context) {
   // 3600000ms = 1 hour
   if (nowDate - storedDate > 3600000 || noDate) {
     noDate = false;
-    const standingData = await getStandingsAPI(253, year);
+    const standingData = await getStandingsAPI(253, YEAR);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];
@@ -105,7 +105,7 @@ export async function getServerSideProps(context) {
   let [easternData, westernData] = await getStandings();
 
   if (!easternData || !westernData) {
-    const standingData = await getStandingsAPI(253, year);
+    const standingData = await getStandingsAPI(253, YEAR);
 
     const easternPostData = standingData[0].league.standings[0];
     const westernPostData = standingData[0].league.standings[1];
@@ -125,7 +125,6 @@ export async function getServerSideProps(context) {
       easternData: JSON.stringify(easternData),
       westernData: JSON.stringify(westernData),
       storedDate,
-      year,
     },
   };
 }
