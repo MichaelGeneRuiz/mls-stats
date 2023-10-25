@@ -9,19 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "chart.js": "^3.9.1",
     "mongodb": "^4.17.1",
     "next": "^13.5.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
-=======
-    "chart.js": "^3.8.0",
-    "mongodb": "^4.17.0",
-    "next": "^12.3.4",
-    "react": "18.2.0",
-    "react-bootstrap": "^2.4.0",
->>>>>>> 8a79e50c7ce36111d0b61f3c4b5018f3390f1f00
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0",
     "sharp": "^0.30.7"
