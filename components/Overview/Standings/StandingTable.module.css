@@ -6,7 +6,7 @@
 .table {
   margin-top: 0.5rem;
   text-align: center;
-  background-color: whitesmoke;
+  background-color: antiquewhite;
   font-size: 0.66rem;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .tableHeader {
-  background-color: lightcoral;
+  background-color: #e8a348;
 }
 
 .name {

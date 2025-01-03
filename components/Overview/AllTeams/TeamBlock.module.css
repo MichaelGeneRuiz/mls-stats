@@ -1,7 +1,7 @@
 .card {
   text-align: center;
   margin: 1rem;
-  background-color: white;
+  background-color: antiquewhite;
 }
 
 .btn {
@@ -12,6 +12,7 @@
 
 .teamName {
   font-weight: bold;
+  background-color: #e8a348;
 }
 
 .yearFounded {
