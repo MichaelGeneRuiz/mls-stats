@@ -13,7 +13,7 @@ import { getStandingsAPI } from "../helpers/api-util";
 
 import Overview from "../components/Overview/Overview";
 
-export const YEAR = process.env.YEAR;
+export const YEAR = 2022;
 
 function HomePage(props) {
   const parsedTeams = JSON.parse(props.teams);
