@@ -87,17 +87,20 @@ export async function getServerSideProps(context) {
 
   // 3600000ms = 1 hour
   if (nowDate - storedDate > 3600000 || noDate) {
-    noDate = false;
-    const standingData = await getStandingsAPI(253, YEAR);
+    
+    // noDate = false;
+    // const standingData = await getStandingsAPI(253, YEAR);
 
-    const easternPostData = standingData[0].league.standings[0];
-    const westernPostData = standingData[0].league.standings[1];
+    // console.log(standingData)
 
-    await postStandings(easternPostData, true);
-    await postStandings(westernPostData, false);
+    // const easternPostData = standingData[0].league.standings[0];
+    // const westernPostData = standingData[0].league.standings[1];
 
-    await postStandingDate(nowDate);
-    storedDate = getFormattedDate(nowDate);
+    // await postStandings(easternPostData, true);
+    // await postStandings(westernPostData, false);
+
+    // await postStandingDate(nowDate);
+    // storedDate = getFormattedDate(nowDate);
   } else {
     storedDate = getFormattedDate(storedDateObj.date);
   }
